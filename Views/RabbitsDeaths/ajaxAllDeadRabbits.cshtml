@@ -1,0 +1,81 @@
+﻿@{
+    var rabbits = (List<FarmManager.Models.MRabbitsDeathsRecords>)ViewBag.rabbits;
+}
+<style>
+    @*style the drop down select entries - datatables*@
+    .custom-select
+    {
+        height:30px!important;
+        width:50px!important;
+        margin-left:5px!important;
+    }
+    @*style the copy buttons- datatables*@
+    .dt-buttons
+    {
+        margin-left:4px!important;
+    }
+</style>
+
+<table id="dt" class="table tblsm">
+    <thead>
+        <tr>
+            <th>NameID</th>
+            <th>D.O.D</th>
+            <th>Notes</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in rabbits)
+        {
+            <tr>
+                <td title="@item.NameId">@item.NameId</td>
+                <td title="@item.DateOfDeath.ToString("d-MMM-yyyy")">@item.DateOfDeath.ToString("d-MMM-yyyy")</td>
+                <td title="@item.Notes">@item.Notes</td>
+                <td>
+                    <a href="~/RabbitsDeaths/EditDeadRabbit/@item.Id" style="color:blue;">
+                        Edit
+                    </a>
+                    |
+                    <a href="javascript:void(0);" style="color:red;" onclick="confirm_delete('@item.Id')">
+                        Delete
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+
+    $('#dt').DataTable({
+        select: true,
+        responsive: true,
+        dom: 'lBfrtip',
+        buttons: [
+            'copyHtml5',
+            'excelHtml5',
+            'csvHtml5',
+            'pdfHtml5'
+        ]
+    });
+
+
+    function confirm_delete(id) {
+        $.confirm({
+            title: 'Information',
+            type: "red",
+            content: 'Delete this Rabbit?',
+            buttons: {
+                Yes: function () {
+                    window.location = "../RabbitsDeaths/DeleteDeadRabbit/" + id;
+                },
+                No: function () {
+                },
+
+            }
+        });
+
+    }
+
+</script>

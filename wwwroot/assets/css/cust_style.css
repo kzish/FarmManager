@@ -1,0 +1,46 @@
+﻿.black
+{
+    color:black!important;
+}
+select {
+min-width:100px!important;
+}
+
+.login_page {
+    display: flex;
+    background-image: url('../img/bg_login.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+    justify-content: center;
+    width: 100% !important;
+}
+
+    .login_page form {
+        box-shadow: 0 0 5px #808080 !important;
+        background: rgba(255,255,255,0.9);
+        border-radius: 5px;
+        padding: 50px;
+        color: red!important;
+        font-weight: 400;
+        min-width: 400px !important;
+    }
+
+    .login_page .black {
+        color: black !important;
+    }
+
+.login_hcity_icon {
+    height: 100px;
+    width: auto;
+}
+
+table td {
+    max-width: 200px !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap;
+    overflow: hidden;
+}

@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewBag.title - FarmManager</title>
+    @*bs*@
+    <link href="~/assets/css/bootstrap.min.css" rel="stylesheet" />
+    @*style*@
+    <link href="~/assets/css/cust_style.css" rel="stylesheet" />
+    @*jq*@
+    <script src="~/assets/js/jquery-3.4.1.min.js"></script>
+    @*busy load full*@
+    <link defer href="~/libs/busyloadfull/busy_load.min.css" rel="stylesheet" />
+    <script defer src="~/libs/busyloadfull/busy_load.min.js"></script>
+    @*validate*@
+    <script defer src="~/assets/js/jquery.validate.min.js"></script>
+
+    @*toaster*@
+    <link href="~/libs/toaster/toastr.min.css" rel="stylesheet" />
+    <script src="~/libs/toaster/toastr.min.js"></script>
+
+</head>
+<body>
+    <div>
+        @RenderBody()
+    </div>
+
+
+    <script>
+        $(window).on('beforeunload', function () {
+            $.busyLoadFull("show");
+        });
+    </script>
+
+    @*toaster*@
+    <script>
+        toastr.options = {
+            "closeButton": false,
+            "debug": false,
+            "newestOnTop": true,
+            "progressBar": false,
+            "positionClass": "toast-bottom-full-width",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        }
+
+
+    </script>
+
+    @if (TempData["tmsg"] != null)
+    {
+        <script>
+            toastr.@(TempData["type"])(`@TempData["tmsg"]`)
+        </script>
+    }
+
+    <script>
+        console.log(`@TempData["ex"]`);
+    </script>
+</body>
+</html>

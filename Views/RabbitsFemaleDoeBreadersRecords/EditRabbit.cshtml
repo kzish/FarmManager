@@ -1,0 +1,118 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+    var rabbits = (List<FarmManager.Models.MRabbits>)ViewBag.rabbits;
+    var rabbit = (FarmManager.Models.MRabbitsFemaleDoeBreadersRecords)ViewBag.rabbit;
+}
+
+<div class="container">
+    <div class="row">
+
+        <div class="col-md-12">
+            <form action="~/RabbitsFemaleDoeBreadersRecords/EditRabbit" method="post" style="width:80%;margin:auto;">
+                <input name="Id" value="@rabbit.Id" type="hidden" />
+
+
+
+                @*row*@
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label><span style="color:red">*</span> Doe</label>
+                            <select name="NameIdDoe" class="form-control chosen">
+                                @foreach (var _rabbit in rabbits.Where(i => i.NameId.ToUpper().StartsWith("F")))
+                                {
+                                    <option value="@_rabbit.NameId" selected="@(_rabbit.NameId==rabbit.NameIdDoe)">
+                                        @_rabbit.NameId
+                                    </option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label><span style="color:red">*</span> Buck</label>
+                            <select name="NameIdBuck" class="form-control chosen">
+                                @foreach (var _rabbit in rabbits.Where(i => i.NameId.ToUpper().StartsWith("M")))
+                                {
+                                    <option value="@_rabbit.NameId" selected="@(_rabbit.NameId==rabbit.NameIdBuck)">
+                                        @_rabbit.NameId
+                                    </option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                @*row*@
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label><span style="color:red">*</span> DateMated</label>
+                            <input name="DateMated" type="text" class="form-control zebra_date" required value="@rabbit.DateMated.ToString("d-MMM-yyyy")">
+                        </div>
+                    </div>
+                </div>
+
+                @*row*@
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label><span style="color:red"></span> LitterSize</label>
+                            <input name="LitterSize" type="number" step="1" min="0" class="form-control" required value="@rabbit.LitterSize">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label><span style="color:red"></span> Deaths</label>
+                            <input name="Deaths" type="number" step="1" min="0" class="form-control" required value="@rabbit.Deaths">
+                        </div>
+                    </div>
+                </div>
+
+
+                @*row*@
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label><span style="color:red"></span> ActualKindlingDate</label>
+                            <input name="ActualKindlingDate" type="text" class="form-control zebra_date" required value="@rabbit.ActualKindlingDate?.ToString("d-MMM-yyyy")">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label><span style="color:red"></span> ActualWeeningDate</label>
+                            <input name="ActualWeeningDate" type="text" class="form-control zebra_date" required value="@rabbit.ActualWeeningDate?.ToString("d-MMM-yyyy")">
+                        </div>
+                    </div>
+                </div>
+
+
+
+                @*row*@
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label><span style="color:red"></span> Notes</label>
+                            <textarea name="Notes" class="form-control">@rabbit.Notes</textarea>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+                </div>
+
+
+            </form>
+        </div>
+
+    </div>
+</div>

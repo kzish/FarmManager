@@ -1,0 +1,98 @@
+﻿@{
+    var rabbits = (List<FarmManager.Models.MRabbitsFemaleDoeBreadersRecords>)ViewBag.rabbits;
+}
+<style>
+    @*style the drop down select entries - datatables*@
+    .custom-select
+    {
+        height:30px!important;
+        width:50px!important;
+        margin-left:5px!important;
+    }
+    @*style the copy buttons- datatables*@
+    .dt-buttons
+    {
+        margin-left:4px!important;
+    }
+</style>
+
+<table id="dt" class="table tblsm">
+    <thead>
+        <tr>
+            <th>Doe</th>
+            <th>Buck</th>
+            <th>DateMated</th>
+            <th>Expectedkindling(1Month)</th>
+            <th>ActualKindling</th>
+            <th>ExpectedWeening(8Weeks)</th>
+            <th>ActualWeening</th>
+            <th>LitterSize</th>
+            <th>Deaths</th>
+            <th>Notes</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in rabbits)
+        {
+            <tr>
+                <td title="@item.NameIdDoe">@item.NameIdDoe</td>
+                <td title="@item.NameIdBuck">@item.NameIdBuck</td>
+                <td title="@item.DateMated.ToString("d-MMM-yyyy")">@item.DateMated.ToString("d-MMM-yyyy")</td>
+                <td title="@item.ActualKindlingDate?.AddDays(31).ToString("d-MMM-yyyy")">@item.ActualKindlingDate?.AddDays(31).ToString("d-MMM-yyyy")</td>
+                <td title="@item.ActualKindlingDate?.ToString("d-MMM-yyyy")">@item.ActualKindlingDate?.ToString("d-MMM-yyyy")</td>
+
+                <td title="@item.ActualWeeningDate?.AddDays(56).ToString("d-MMM-yyyy")">@item.ActualWeeningDate?.AddDays(56).ToString("d-MMM-yyyy")</td>
+                <td title="@item.ActualWeeningDate?.ToString("d-MMM-yyyy")">@item.ActualWeeningDate?.ToString("d-MMM-yyyy")</td>
+
+                <td title="@item.LitterSize">@item.LitterSize</td>
+                <td title="@item.Deaths">@item.Deaths</td>
+                <td title="@item.Notes">@item.Notes</td>
+
+                <td>
+                    <a href="~/RabbitsFemaleDoeBreadersRecords/EditRabbit/@item.Id" style="color:blue;">
+                        Edit
+                    </a>
+                    |
+                    <a href="javascript:void(0);" style="color:red;" onclick="confirm_delete('@item.Id')">
+                        Delete
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+
+    $('#dt').DataTable({
+        select: true,
+        responsive: true,
+        dom: 'lBfrtip',
+        buttons: [
+            'copyHtml5',
+            'excelHtml5',
+            'csvHtml5',
+            'pdfHtml5'
+        ]
+    });
+
+
+    function confirm_delete(id) {
+        $.confirm({
+            title: 'Information',
+            type: "red",
+            content: 'Delete this Record?',
+            buttons: {
+                Yes: function () {
+                    window.location = "../RabbitsFemaleDoeBreadersRecords/DeleteRabbit/" + id;
+                },
+                No: function () {
+                },
+
+            }
+        });
+
+    }
+
+</script>

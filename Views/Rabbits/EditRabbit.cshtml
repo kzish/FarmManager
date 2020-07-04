@@ -1,0 +1,110 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+    var rabbits = (List<FarmManager.Models.MRabbits>)ViewBag.rabbits;
+    var rabbit = (FarmManager.Models.MRabbits)ViewBag.rabbit;
+}
+
+<div class="container">
+    <div class="row">
+
+        <div class="col-md-12">
+            <form action="~/Rabbits/EditRabbit" method="post" style="width:80%;margin:auto;">
+                <input name="old_rabbit_id" value="@rabbit.Id" type="hidden" />
+                @*row*@
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label><span style="color:red">*</span> NameID</label>
+                            <input name="NameID" type="text" class="form-control" required value="@rabbit.NameId">
+                        </div>
+                    </div>
+                </div>
+
+
+                @*row*@
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label><span style="color:red">*</span> D.O.B</label>
+                            <input name="DateOfBirth" type="text" class="form-control zebra_date" required value="@rabbit.DateOfBirth.ToString("d-MMM-yyyy")">
+                        </div>
+                    </div>
+                </div>
+
+
+                @*row*@
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label><span style="color:red">*</span> SireID</label>
+                            <select name="SireID" class="form-control chosen">
+                                <option value="N/A">N/A</option>
+                                @foreach (var _rabbit in rabbits.Where(i => i.NameId.ToUpper().StartsWith("M")))
+                                {
+                                    @if (_rabbit.NameId == rabbit.NameId)
+                                    {
+                                        continue; //skip this rabbit cannot be its own sire or dame
+                                    }
+                                    <option value="@_rabbit.NameId" selected="@(rabbit.SireId==_rabbit.NameId)">
+                                        @_rabbit.NameId
+                                    </option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label><span style="color:red">*</span> DameID</label>
+                            <select name="DameID" class="form-control chosen">
+                                <option value="N/A">N/A</option>
+                                @foreach (var _rabbit in rabbits.Where(i => i.NameId.ToUpper().StartsWith("F")))
+                                {
+                                    @if (_rabbit.NameId == rabbit.NameId)
+                                    {
+                                        continue; //skip this rabbit cannot be its own sire or dame
+                                    }
+                                    <option value="@_rabbit.NameId" selected="@(rabbit.DameId==_rabbit.NameId)">
+                                        @_rabbit.NameId
+                                    </option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                @*row*@
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label><span style="color:red">*</span> Litter Number</label>
+                            <input name="LitterNumber" value="@rabbit.LitterNumber" type="number" min="0" step="1" class="form-control" required>
+                        </div>
+                    </div>
+                </div>
+
+                @*row*@
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label><span style="color:red"></span> Notes</label>
+                            <textarea name="Notes" class="form-control">@rabbit.Notes</textarea>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+                </div>
+
+
+            </form>
+        </div>
+
+    </div>
+</div>

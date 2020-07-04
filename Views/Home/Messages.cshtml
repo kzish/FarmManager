@@ -1,0 +1,42 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+    var roles = (List<Microsoft.AspNetCore.Identity.IdentityRole>)ViewBag.roles;
+}
+<style>
+    #wrap {
+        width: 100%;
+        height: auto;
+        padding: 0;
+        position: fixed;
+    }
+
+    .iframe {
+        width: 100%;
+        height: 100vh;
+        border: 0px solid black;
+        transform: scale(0.8);
+        transform-origin: 0 0;
+        -o-transform: scale(0.8);
+        -o-transform-origin: 0 0;
+        -moz-transform: scale(0.8);
+        -moz-transform-origin: 0 0;
+        -webkit-transform: scale(0.8);
+        -webkit-transform-origin: 0 0;
+    }
+</style>
+
+
+
+<div class="container." style="overflow:hidden!important;margin-left:10px;margin-right:10px;">
+    <div class="row">
+        <div class="col-md-12">
+            <div id="wrap">
+                @*offline*@
+                @*<iframe class="iframe" src="http://localhost:4200/" frameborder="1"></iframe>*@
+
+                @*online*@
+                <iframe class="iframe" src="https://rubieminnovations.com:9002/ChatUI/" frameborder="1"></iframe>
+            </div>
+        </div>
+    </div>
+</div>

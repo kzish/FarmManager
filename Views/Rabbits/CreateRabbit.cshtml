@@ -1,0 +1,101 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+    var rabbits = (List<FarmManager.Models.MRabbits>)ViewBag.rabbits;
+}
+
+<div class="container">
+    <div class="row">
+
+        <div class="col-md-12">
+            <form action="~/Rabbits/CreateRabbit" method="post" style="width:80%;margin:auto;">
+
+                @*row*@
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label><span style="color:red">*</span> NameID</label>
+                            <input name="NameID" type="text" class="form-control" required>
+                        </div>
+                    </div>
+                </div>
+
+
+                @*row*@
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label><span style="color:red">*</span> D.O.B</label>
+                            <input name="DateOfBirth" type="text" class="form-control zebra_date" required>
+                        </div>
+                    </div>
+                </div>
+
+
+                @*row*@
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label><span style="color:red">*</span> SireID</label>
+                            <select name="SireID" class="form-control chosen">
+                                <option value="N/A">N/A</option>
+                                @foreach (var rabbit in rabbits.Where(i=>i.NameId.ToUpper().StartsWith("M")))
+                                {
+                                    <option value="@rabbit.NameId">
+                                        @rabbit.NameId
+                                    </option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label><span style="color:red">*</span> DameID</label>
+                            <select name="DameID" class="form-control chosen">
+                                <option value="N/A">N/A</option>
+                                @foreach (var rabbit in rabbits.Where(i => i.NameId.ToUpper().StartsWith("F")))
+                                {
+                                    <option value="@rabbit.NameId">
+                                        @rabbit.NameId
+                                    </option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                @*row*@
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label><span style="color:red">*</span> Litter Number</label>
+                            <input name="LitterNumber" value="" type="number" min="0" step="1" class="form-control" required>
+                        </div>
+                    </div>
+                </div>
+
+                @*row*@
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label><span style="color:red"></span> Notes</label>
+                            <textarea name="Notes" class="form-control"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+                </div>
+
+
+            </form>
+        </div>
+
+    </div>
+</div>

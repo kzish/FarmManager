@@ -1,0 +1,82 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+    var roles = (List<Microsoft.AspNetCore.Identity.IdentityRole>)ViewBag.roles;
+}
+<style>
+    @*style the drop down select entries - datatables*@
+    .custom-select
+    {
+        height:30px!important;
+        width:50px!important;
+        margin-left:5px!important;
+    }
+    @*style the copy buttons- datatables*@
+    .dt-buttons
+    {
+        margin-left:4px!important;
+    }
+</style>
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <table id="dt" class="table tblsm">
+                <thead>
+                    <tr>
+                        <th>RoleName</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in roles)
+                    {
+                        <tr>
+                            <td title="@item.Name">@item.Name</td>
+                            <td>
+                                @*<a href="javascript:void(0);" style="color:red;" onclick="confirm_delete('@item.Id')">
+                                    Delete
+                                </a>*@
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    $('#dt').DataTable({
+        select: true,
+        responsive: true,
+        dom: 'lBfrtip',
+        buttons: [
+            'copyHtml5',
+            'excelHtml5',
+            'csvHtml5',
+            'pdfHtml5'
+        ]
+    });
+
+
+    function confirm_delete(id) {
+        $.confirm({
+            title: 'Information',
+            type: "red",
+            content: 'Delete this Role?',
+            buttons: {
+                Yes: function () {
+                    window.location = "../Clients/DeleteRole/" + id;
+                },
+                No: function () {
+                },
+
+            }
+        });
+
+    }
+
+</script>

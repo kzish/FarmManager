@@ -1,0 +1,346 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>@ViewBag.title - FarmManager</title>
+    <link href="~/assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/assets/css/main_style.css" rel="stylesheet" />
+    <link href="~/assets/css/cust_style.css?v=" rel="stylesheet" />
+    <link href="~/assets/css/pagination.css" rel="stylesheet" />
+    <script src="~/assets/js/jquery-3.4.1.min.js"></script>
+    <link defer href="~/libs/busyloadfull/busy_load.min.css" rel="stylesheet" />
+    <script defer src="~/libs/busyloadfull/busy_load.min.js"></script>
+    <link defer href="~/assets/css/jquery.mCustomScrollbar.min.css" rel="stylesheet" />
+    <script defer src="~/assets/js/solid.js"></script>
+    <script defer src="~/assets/js/fontawesome.js"></script>
+    <script defer src="~/assets/js/popper.min.js"></script>
+    <script defer src="~/assets/js/bootstrap.min.js"></script>
+    <script defer src="~/assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script defer src="~/assets/js/jquery.validate.min.js"></script>
+    <link defer href="~/libs/font_awesome/css/all.css" rel="stylesheet" />
+    <link defer href="~/libs/font_awesome/css/brands.css" rel="stylesheet" />
+    <link defer href="~/libs/font_awesome/css/fontawesome.css" rel="stylesheet" />
+    <link defer href="~/libs/font_awesome/css/regular.css" rel="stylesheet" />
+    <link defer href="~/libs/font_awesome/css/solid.css" rel="stylesheet" />
+    <link defer href="~/libs/font_awesome/css/svg-with-js.css" rel="stylesheet" />
+    <link defer href="~/libs/font_awesome/css/v4-shims.css" rel="stylesheet" />
+    <script src="~/libs/zebra_date_picker/zebra_datepicker.min.js"></script>
+    <link defer href="~/libs/zebra_date_picker/css/bootstrap/zebra_datepicker.css" rel="stylesheet" />
+    <link href="~/libs/toaster/toastr.min.css" rel="stylesheet" />
+    <script src="~/libs/toaster/toastr.min.js"></script>
+    <script src="~/assets/js/jquery.validate.min.js"></script>
+    <link href="~/libs/jquery_alerts/jquery-confirm.min.css" rel="stylesheet" />
+    <script src="~/libs/jquery_alerts/jquery-confirm.min.js"></script>
+    <script src="~/libs/data_tables/jquery.dataTables.js"></script>
+    <link href="~/libs/data_tables/jquery.dataTables.css" rel="stylesheet" />
+    <script src="~/libs/chosen/chosen.jquery.min.js"></script>
+    <link href="~/libs/chosen/chosen.min.css" rel="stylesheet" />
+
+
+</head>
+<body>
+
+    @{ 
+                //var db = new SpeedLinkAdminPortal.Models.dbContext();
+                //var unreadMessages = db.MChatMessage.AsQueryable().Where(i=>!i.IsRead).GroupBy(i=>i.CustomerNumber).Count();
+                //db.Dispose();
+    }
+
+
+    @*hide collapsible button*@
+    <style>
+        .btn .btn-dark .d-inline-block .d-lg-none .ml-auto {
+            visibility: hidden;
+        }
+    </style>
+
+
+    @*nav*@
+    <div class="wrapper">
+
+        @*sidebar nav*@
+        <div id="sidebar">
+            <br />
+            <center>
+                <h2>Farm<span style="color:red;">Manager</span></h2>
+            </center>
+            <div class="sidebar-header">
+                <center>
+                    <img src="~/assets/img/logo.png" class="login_hcity_icon" />
+                </center>
+            </div>
+
+            <p class="user_info">
+                <center>
+                    @User.Identity.Name
+                    <br />
+                    <form method="post" action="~/Auth/LogOff">
+                        <button type="submit" class="btn btn-link"><u>Sign out</u></button>
+                    </form>
+                </center>
+            </p>
+
+
+            <ul class="list-unstyled components">
+
+
+                <li class="@(ViewBag.title=="Dashboard"?"active":"")">
+                    <a href="~/Home/Dashboard">Dashboard</a>
+                </li>
+
+
+                <li @(ViewBag.title.ToLower().Contains("rabbits") ? "active" : "")>
+                    <a href="#roles"
+                       data-toggle="collapse"
+                       aria-expanded="false"
+                       class="dropdown-toggle">Rabbits</a>
+                    <ul class="collapse list-unstyled" id="roles">
+                        <li>
+                            <a href="~/Rabbits/AllRabbits">All Rabbits</a>
+                        </li>
+                        <li title="records about rabbit deaths">
+                            <a href="~/RabbitsDeaths/AllDeadRabbits">Deaths Records</a>
+                        </li>
+                        <li title="records about the female breaders (does)">
+                            <a href="~/RabbitsFemaleDoeBreadersRecords/AllRabbits">Breaders Records</a>
+                        </li>
+                        <li title="All Sales records of rabbits">
+                            <a href="~/Rabbits/RabbitsSalesRecords">Sales Records</a>
+                        </li>
+                        <li title="Any treatment administered to a rabbits">
+                            <a href="~/Rabbits/RabbitsTreatMentsRecords">Treatments Records</a>
+                        </li>
+                        <hr />
+                        <li title="Notes about rabit deseases and their treatment">
+                            <a href="~/Rabbits/RabbitsDeseasesAndTreatmentsNotes">Deseases And Treatments Notes</a>
+                        </li>
+
+                        <li title="Any notes about rabits">
+                            <a href="~/Rabbits/RabbitsNotes">Rabbit Notes</a>
+                        </li>
+
+                    </ul>
+                </li>
+
+                @*
+                <li @(ViewBag.title.Contains("Account") ? "active" : "")>
+                    <a href="#account"
+                       data-toggle="collapse"
+                       aria-expanded="false"
+                       class="dropdown-toggle">My Account</a>
+                    <ul class="collapse list-unstyled" id="account">
+                        <li>
+                            <a href="/Account/ChangePassword">Change Password</a>
+                        </li>
+                        <li>
+                            <a href="/Account/AccountDetails">Account Details</a>
+                        </li>
+                    </ul>
+                </li>
+
+
+                <li @(ViewBag.title.Contains("Bill") ? "active" : "")>
+                    <a href="#bill"
+                       data-toggle="collapse"
+                       aria-expanded="false"
+                       class="dropdown-toggle">Billing</a>
+                    <ul class="collapse list-unstyled" id="bill">
+                        <li>
+                            <a href="/Billing/UploadPayment">Upload Payment</a>
+                        </li>
+                        <li>
+                            <a href="/Billing/PaymentHistory">Payment History</a>
+                        </li>
+                    </ul>
+                </li>
+
+
+
+
+
+
+                <li @(ViewBag.title.Contains("Asset") ? "active" : "")>
+                    <a href="#Reports"
+                       data-toggle="collapse"
+                       aria-expanded="false"
+                       class="dropdown-toggle">My Assets</a>
+                    <ul class="collapse list-unstyled" id="Reports">
+                        <li>
+                            <a href="/Assets/CreateAsset">New Asset</a>
+                        </li>
+                        <li>
+                            <a href="/Assets/ListAllMyAssets">All</a>
+                        </li>
+                    </ul>
+                </li>
+
+
+                <li @(ViewBag.title.Contains("Notification") ? "active" : "")>
+                    <a href="#notifications"
+                       data-toggle="collapse"
+                       aria-expanded="false"
+                       class="dropdown-toggle">
+                        Notifications
+                        <span class="badge badge-pill badge-danger">
+                            @ViewBag.num_notifications
+                        </span>
+                    </a>
+                    <ul class="collapse list-unstyled" id="notifications">
+                        <li>
+                            <a href="/Notifications/AllNotifications">
+                                All Notifications
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/Notifications/Read">Read</a>
+                        </li>
+
+                        <li>
+                            <a href="/Notifications/UnRead">UnRead</a>
+                        </li>
+
+                    </ul>
+                </li>
+
+
+                @*
+        <li class="@(ViewBag.title=="Settings"?"active":"")">
+            <a href="/Home/Settings">Settings</a>
+        </li>
+
+
+
+                <li class="@(ViewBag.title=="About"?"active":"")">
+                    <a href="/Home/About">About</a>
+                </li>
+
+            </ul>
+                *@
+
+            </ul>
+
+        </div>
+
+
+
+        <!-- Page Content  -->
+        <div id="content">
+
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+
+                    <button type="button" id="sidebarCollapse" class="btn btn-sm btn-outline-danger el_nav">
+                        <i class="fas fa-align-left"></i>
+                    </button>
+                    <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="fas fa-align-justify"></i>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <div class="nav navbar-nav ml-auto">
+                            <h5>@ViewBag.title</h5>
+                        </div>
+                        @*                        <ul class="nav navbar-nav ml-auto">
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="#">Page</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">Page</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">Page</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">Page</a>
+                                </li>
+                            </ul>*@
+                    </div>
+                </div>
+            </nav>
+
+            <div style="padding:10px;">
+
+                @RenderBody()
+            </div>
+
+        </div>
+
+
+    </div>@*.wrapper*@
+
+
+    @*busyload*@
+    <script>
+        $(window).on('beforeunload', function () {
+            $.busyLoadFull("show");
+        });
+    </script>
+
+    @*scrollbar*@
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#sidebar").mCustomScrollbar({
+                theme: "minimal"
+            });
+
+            $('.el_nav').on('click', function () {
+                $('#sidebar, #content').toggleClass('active');
+                $('.collapse.in').toggleClass('in');
+                $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+            });
+
+
+
+        });
+    </script>
+
+    @*toaster*@
+    <script>
+        toastr.options = {
+            "closeButton": false,
+            "debug": false,
+            "newestOnTop": true,
+            "progressBar": false,
+            "positionClass": "toast-bottom-full-width",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        }
+
+
+    </script>
+
+    @if (TempData["type"] != null)
+    {
+        <script>
+            toastr.@(TempData["type"])(`@TempData["msg"]`)
+        </script>
+    }
+
+    <script>
+        console.log(`@TempData["ex"]`);
+    </script>
+
+
+    <script>
+        $('.zebra_date').Zebra_DatePicker({
+            format:'d-M-Y'
+        });
+    </script>
+
+    <script>
+        $(".chosen").chosen();
+    </script>
+
+</body>
+</html>

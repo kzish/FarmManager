@@ -1,0 +1,65 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+    var rabbit = (FarmManager.Models.MRabbitsDeathsRecords)ViewBag.rabbit;
+    var rabbits = (List<FarmManager.Models.MRabbits>)ViewBag.rabbits;
+}
+
+<div class="container">
+    <div class="row">
+
+        <div class="col-md-12">
+            <form action="~/RabbitsDeaths/EditDeadRabbit" method="post" style="width:80%;margin:auto;">
+                <input name="old_rabbit_id" value="@rabbit.Id" type="hidden" />
+                @*row*@
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label><span style="color:red">*</span> NameID</label>
+                            <select name="NameID" class="form-control chosen">
+                                @foreach(var _rabbit in rabbits)
+                                {
+                                    <option value="@_rabbit.NameId" selected="@(_rabbit.NameId==rabbit.NameId)">@_rabbit.NameId</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+
+                @*row*@
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label><span style="color:red">*</span> D.O.D</label>
+                            <input name="DateOfDeath" type="text" class="form-control zebra_date" required value="@rabbit.DateOfDeath.ToString("d-MMM-yyyy")">
+                        </div>
+                    </div>
+                </div>
+
+
+                @*row*@
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label><span style="color:red"></span> Notes</label>
+                            <textarea name="Notes" class="form-control">@rabbit.Notes</textarea>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+                </div>
+
+
+            </form>
+        </div>
+
+    </div>
+</div>
