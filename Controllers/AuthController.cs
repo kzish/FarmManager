@@ -71,7 +71,7 @@ namespace admin.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("Dashboard", "Home");
+                    return RedirectToAction("AllRabbits", "Rabbits");
                 }
             }
             else
