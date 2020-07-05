@@ -1,0 +1,49 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+    var record = (FarmManager.Models.MRabbitsNotes)ViewBag.record;
+}
+
+<div class="container">
+    <div class="row">
+
+        <div class="col-md-12">
+            <form action="~/RabbitsNotes/EditRecord" method="post" style="width:80%;margin:auto;">
+                <input type="hidden" name="Id" value="@record.Id"/>
+                @*row*@
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label><span style="color:red">*</span> Title</label>
+                            <input type="text" class="form-control" name="Title" value="@record.Title" required/>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                @*row*@
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label><span style="color:red">*</span> Notes</label>
+                            <textarea name="Notes" class="form-control" required>@record.Notes</textarea>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+                </div>
+
+
+            </form>
+        </div>
+
+    </div>
+</div>

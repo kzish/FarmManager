@@ -10,45 +10,48 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace FarmManager.Controllers
 {
-    [Route("RabbitsSales")]
+    /// <summary>
+    /// deals with the rabbits treatments
+    /// </summary>
+    [Route("RabbitsTreatment")]
     [Authorize(Roles = "admin")]
-    public class RabbitsSalesController : Controller
+    public class RabbitsTreatmentController : Controller
     {
         dbContext db = new dbContext();
-        private string source = "FarmManager.Controllers.RabbitsController.";
+        private string source = "FarmManager.Controllers.RabbitsTreatmentController.";
         UserManager<IdentityUser> userManager;
         RoleManager<IdentityRole> roleManager;
 
-        public RabbitsSalesController(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
+        public RabbitsTreatmentController(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             this.userManager = userManager;
             this.roleManager = roleManager;
         }
 
-        [HttpGet("ajaxAllRabbits")]
-        public IActionResult ajaxAllRabbits()
+        [HttpGet("ajaxAllRecords")]
+        public IActionResult ajaxAllRecords()
         {
-            ViewBag.title = "All Rabbit Sales";
-            var rabbits = db.MRabbitsSalesRecords.ToList();
+            ViewBag.title = "All Rabbit Treatments";
+            var rabbits = db.MRabbitsTreatmentRecords.ToList();
             ViewBag.rabbits = rabbits;
             return View();
         }
 
-        [HttpGet("AllRabbits")]
+        [HttpGet("AllRecords")]
         [HttpGet("")]
-        public IActionResult AllRabbits()
+        public IActionResult AllRecords()
         {
-            ViewBag.title = "All Rabbit Sales";
+            ViewBag.title = "All Rabbit Treatments";
             return View();
         }
 
-        [HttpGet("DeleteRabbit/{id}")]
-        public async Task<IActionResult> DeleteRabbit(int id)
+        [HttpGet("DeleteRecord/{id}")]
+        public async Task<IActionResult> DeleteRecord(int id)
         {
-            ViewBag.title = "Delete Rabbit";
+            ViewBag.title = "Delete Record";
             try
             {
-                var Rabbit = db.MRabbitsSalesRecords.Find(id);
+                var Rabbit = db.MRabbitsTreatmentRecords.Find(id);
                 db.Remove(Rabbit);
                 await db.SaveChangesAsync();
                 TempData["type"] = "success";
@@ -59,13 +62,13 @@ namespace FarmManager.Controllers
                 TempData["type"] = "error";
                 TempData["msg"] = "Error: " + ex.Message;
             }
-            return RedirectToAction("AllRabbits");
+            return RedirectToAction("AllRecords");
         }
 
-        [HttpGet("CreateRabbitSaleRecord")]
-        public IActionResult CreateRabbitSaleRecord()
+        [HttpGet("CreateRecord")]
+        public IActionResult CreateRecord()
         {
-            ViewBag.title = "Create Rabbit";
+            ViewBag.title = "Create Record";
             var dead_rabbits = db.MRabbitsDeathsRecords.Select(i => i.NameId).ToList();
             var sold_rabbits = db.MRabbitsSalesRecords.Select(i => i.NameId).ToList();
             var available_rabbits = db.MRabbits
@@ -77,38 +80,38 @@ namespace FarmManager.Controllers
         }
 
 
-        [HttpPost("CreateRabbitSaleRecord")]
-        public async Task<IActionResult> CreateRabbitSaleRecord(MRabbitsSalesRecords rabbit)
+        [HttpPost("CreateRecord")]
+        public async Task<IActionResult> CreateRabbitSaleRecord(MRabbitsTreatmentRecords rabbit)
         {
-            ViewBag.title = "Create Rabbit";
+            ViewBag.title = "Create Record";
             try
             {
                 rabbit.NameId = rabbit.NameId.ToUpper();
-                db.MRabbitsSalesRecords.Add(rabbit);
+                db.MRabbitsTreatmentRecords.Add(rabbit);
                 TempData["type"] = "success";
                 TempData["msg"] = "Saved";
                 await db.SaveChangesAsync();
-                return RedirectToAction("AllRabbits");
             }
             catch (Exception ex)
             {
                 TempData["type"] = "error";
                 TempData["msg"] = "Error: " + ex.Message;
-                return RedirectToAction($"CreateRabbit", "Rabbits");
+                
             }
+            return RedirectToAction("AllRecords");
         }
 
 
-        [HttpGet("EditRabbit/{id}")]
-        public IActionResult EditRabbit(int id)
+        [HttpGet("EditRecord/{id}")]
+        public IActionResult EditRecord(int id)
         {
-            ViewBag.title = "Edit Rabbit";
-            var rabbit = db.MRabbitsSalesRecords.Find(id);
+            ViewBag.title = "Edit Record";
+            var rabbit = db.MRabbitsTreatmentRecords.Find(id);
             var dead_rabbits = db.MRabbitsDeathsRecords.Select(i => i.NameId).ToList();
-            //var sold_rabbits = db.MRabbitsSalesRecords.Select(i => i.NameId).ToList();//allow sold but not dead
+            var sold_rabbits = db.MRabbitsSalesRecords.Select(i => i.NameId).ToList();
             var available_rabbits = db.MRabbits
                 .Where(i => !dead_rabbits.Contains(i.NameId))
-                //.Where(i => !sold_rabbits.Contains(i.NameId))
+                .Where(i => !sold_rabbits.Contains(i.NameId))
                 .ToList();
             ViewBag.rabbit = rabbit;
             ViewBag.rabbits = available_rabbits;
@@ -116,10 +119,10 @@ namespace FarmManager.Controllers
         }
 
 
-        [HttpPost("EditRabbit")]
-        public async Task<IActionResult> EditRabbit(MRabbitsSalesRecords rabbit)
+        [HttpPost("EditRecord")]
+        public async Task<IActionResult> EditRecord(MRabbitsTreatmentRecords rabbit)
         {
-            ViewBag.title = "Edit Rabbit";
+            ViewBag.title = "Edit Record";
             try
             {
                 db.Entry(rabbit).State = EntityState.Modified;
@@ -132,7 +135,7 @@ namespace FarmManager.Controllers
                 TempData["msg"] = ex.Message;
                 TempData["type"] = "error";
             }
-            return RedirectToAction("EditRabbit", "RabbitsSales", new { id = rabbit.Id });
+            return RedirectToAction("EditRecord", "RabbitsTreatment", new { id = rabbit.Id });
         }
 
         protected override void Dispose(bool disposing)

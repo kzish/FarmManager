@@ -1,0 +1,70 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+
+        <div class="col-md-12">
+            <form action="~/RabbitsDeseasesAndTreatments/CreateRecord" method="post" style="width:80%;margin:auto;">
+
+                @*row*@
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label><span style="color:red">*</span> Desease</label>
+                            <input type="text" class="form-control" name="Desease" required/>
+                        </div>
+                    </div>
+                </div>
+
+
+                 @*row*@
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label><span style="color:red">*</span> Symptoms</label>
+                            <input type="text" class="form-control" name="Symptoms" required/>
+                        </div>
+                    </div>
+                </div>
+
+
+                  @*row*@
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label><span style="color:red">*</span> Treatment</label>
+                            <input type="text" class="form-control" name="Treatment" required/>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                @*row*@
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label><span style="color:red"></span> Notes</label>
+                            <textarea name="Notes" class="form-control"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+                </div>
+
+
+            </form>
+        </div>
+
+    </div>
+</div>

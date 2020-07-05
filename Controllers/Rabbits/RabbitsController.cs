@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace FarmManager.Controllers
 {
     [Route("Rabbits")]
+    [Route("")]
     [Authorize(Roles = "admin")]
     public class RabbitsController : Controller
     {

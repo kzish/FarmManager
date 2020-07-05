@@ -1,5 +1,5 @@
 ﻿@{
-    var rabbits = (List<FarmManager.Models.MRabbitsSalesRecords>)ViewBag.rabbits;
+    var rabbits = (List<FarmManager.Models.MRabbitsTreatmentRecords>)ViewBag.rabbits;
 }
 <style>
     @*style the drop down select entries - datatables*@
@@ -20,15 +20,9 @@
     <thead>
         <tr>
             <th>NameID</th>
-            <th>DateSold</th>
-            <th>Weeks(Old)</th>
-            <th>Weight(KG)</th>
-            <th>Pedigree</th>
-            <th>Price</th>
-            <th>BuyerName</th>
-            <th>BuyerMobile</th>
-            <th>BuyerEmail</th>
-            <th>BuyerAddress</th>
+            <th>Illness</th>
+            <th>Treatment</th>
+            <th>DateTreated</th>
             <th>Notes</th>
             <th>Action</th>
         </tr>
@@ -38,18 +32,12 @@
         {
             <tr>
                 <td title="@item.NameId">@item.NameId</td>
-                <td title="@item.DateSold.ToString("d-MMM-yyyy")">@item.DateSold.ToString("d-MMM-yyyy")</td>
-                <td title="@item.WeeksOld">@item.WeeksOld</td>
-                <td title="@item.WeightKg">@item.WeightKg</td>
-                <td title="@item.Pedigree">@item.Pedigree</td>
-                <td title="@item.Price">@item.Price</td>
-                <td title="@item.BuyerName">@item.BuyerName</td>
-                <td title="@item.BuyerMobile">@item.BuyerMobile</td>
-                <td title="@item.BuyerEmail">@item.BuyerEmail</td>
-                <td title="@item.BuyerAddress">@item.BuyerAddress</td>
+                <td title="@item.Illness">@item.Illness</td>
+                <td title="@item.Treatment">@item.Treatment</td>
+                <td title="@item.DateTreated.ToString("d-MMM-yyyy")">@item.DateTreated.ToString("d-MMM-yyyy")</td>
                 <td title="@item.Notes">@item.Notes</td>
                 <td>
-                    <a href="~/RabbitsSales/EditRabbit/@item.Id" style="color:blue;">
+                    <a href="~/RabbitsTreatment/EditRecord/@item.Id" style="color:blue;">
                         Edit
                     </a>
                     |
@@ -84,7 +72,7 @@
             content: 'Delete this Record?',
             buttons: {
                 Yes: function () {
-                    window.location = "../RabbitsSales/DeleteRabbit/" + id;
+                    window.location = "../RabbitsTreatment/DeleteRecord/" + id;
                 },
                 No: function () {
                 },

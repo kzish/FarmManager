@@ -10,8 +10,8 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace SpeedLinkAdminPortal.Controllers
 {
-    [Route("Home")]
-    [Route("")]
+    //[Route("Home")]
+    //[Route("")]
     [Authorize(Roles="admin")]
     public class HomeController : Controller
     {

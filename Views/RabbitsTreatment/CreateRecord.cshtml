@@ -1,0 +1,85 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+    var rabbits = (List<FarmManager.Models.MRabbits>)ViewBag.rabbits;
+}
+
+<div class="container">
+    <div class="row">
+
+        <div class="col-md-12">
+            <form action="~/RabbitsTreatment/CreateRecord" method="post" style="width:80%;margin:auto;">
+
+                @*row*@
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label><span style="color:red">*</span> NameID</label>
+                            <select name="NameId" class="form-control chosen">
+                                @foreach (var _rabbit in rabbits)
+                                {
+                                    <option value="@_rabbit.NameId">@_rabbit.NameId</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+
+                @*row*@
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label><span style="color:red">*</span>Illness</label>
+                            <input name="Illness" type="text" class="form-control" required>
+                        </div>
+                    </div>
+                </div>
+
+                @*row*@
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label><span style="color:red">*</span>Treatment</label>
+                            <input name="Treatment" type="text" class="form-control" required>
+                        </div>
+                    </div>
+                </div>
+
+                @*row*@
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label><span style="color:red">*</span>DateTreated</label>
+                            <input name="DateTreated" type="text" class="form-control zebra_date" required>
+                        </div>
+                    </div>
+                </div>
+
+
+           
+                @*row*@
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label><span style="color:red"></span> Notes</label>
+                            <textarea name="Notes" class="form-control"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+                </div>
+
+
+            </form>
+        </div>
+
+    </div>
+</div>

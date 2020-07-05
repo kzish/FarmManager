@@ -21,7 +21,7 @@
 <div class="container">
     <row>
         <div class="col-md-12">
-            <a href="~/RabbitsSales/CreateRabbitSaleRecord" class="btn btn-primary btn-sm">Create Record</a>
+            <a href="~/RabbitsNotes/CreateRecord" class="btn btn-primary btn-sm">Create Record</a>
         </div>
         <br />
     </row>
@@ -37,7 +37,7 @@
 <script>
 
     $.ajax({
-        url: "@Url.Content("~/RabbitsSales/ajaxAllRabbits")",
+        url: "@Url.Content("~/RabbitsNotes/ajaxAllRecords")",
         success: function (data) {
             $("#loader").hide();
             $("#clients").html(data);

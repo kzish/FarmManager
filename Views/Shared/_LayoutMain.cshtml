@@ -43,11 +43,6 @@
 </head>
 <body>
 
-    @{ 
-                //var db = new SpeedLinkAdminPortal.Models.dbContext();
-                //var unreadMessages = db.MChatMessage.AsQueryable().Where(i=>!i.IsRead).GroupBy(i=>i.CustomerNumber).Count();
-                //db.Dispose();
-    }
 
 
     @*hide collapsible button*@
@@ -87,9 +82,9 @@
             <ul class="list-unstyled components">
 
 
-                <li class="@(ViewBag.title=="Dashboard"?"active":"")">
-                    <a href="~/Home/Dashboard">Dashboard</a>
-                </li>
+                @*<li class="@(ViewBag.title=="Dashboard"?"active":"")">
+                        <a href="~/Home/Dashboard">Dashboard</a>
+                    </li>*@
 
 
                 <li @(ViewBag.title.ToLower().Contains("rabbits") ? "active" : "")>
@@ -108,117 +103,24 @@
                             <a href="~/RabbitsFemaleDoeBreadersRecords/AllRabbits">Breaders Records</a>
                         </li>
                         <li title="All Sales records of rabbits">
-                            <a href="~/Rabbits/RabbitsSalesRecords">Sales Records</a>
+                            <a href="~/RabbitsSales/AllRabbits">Sales Records</a>
                         </li>
                         <li title="Any treatment administered to a rabbits">
-                            <a href="~/Rabbits/RabbitsTreatMentsRecords">Treatments Records</a>
+                            <a href="~/RabbitsTreatment/AllRecords">Treatments Records</a>
                         </li>
                         <hr />
                         <li title="Notes about rabit deseases and their treatment">
-                            <a href="~/Rabbits/RabbitsDeseasesAndTreatmentsNotes">Deseases And Treatments Notes</a>
+                            <a href="~/RabbitsDeseasesAndTreatments/AllRecords">Deseases And Treatments Notes</a>
                         </li>
 
                         <li title="Any notes about rabits">
-                            <a href="~/Rabbits/RabbitsNotes">Rabbit Notes</a>
-                        </li>
-
-                    </ul>
-                </li>
-
-                @*
-                <li @(ViewBag.title.Contains("Account") ? "active" : "")>
-                    <a href="#account"
-                       data-toggle="collapse"
-                       aria-expanded="false"
-                       class="dropdown-toggle">My Account</a>
-                    <ul class="collapse list-unstyled" id="account">
-                        <li>
-                            <a href="/Account/ChangePassword">Change Password</a>
-                        </li>
-                        <li>
-                            <a href="/Account/AccountDetails">Account Details</a>
-                        </li>
-                    </ul>
-                </li>
-
-
-                <li @(ViewBag.title.Contains("Bill") ? "active" : "")>
-                    <a href="#bill"
-                       data-toggle="collapse"
-                       aria-expanded="false"
-                       class="dropdown-toggle">Billing</a>
-                    <ul class="collapse list-unstyled" id="bill">
-                        <li>
-                            <a href="/Billing/UploadPayment">Upload Payment</a>
-                        </li>
-                        <li>
-                            <a href="/Billing/PaymentHistory">Payment History</a>
-                        </li>
-                    </ul>
-                </li>
-
-
-
-
-
-
-                <li @(ViewBag.title.Contains("Asset") ? "active" : "")>
-                    <a href="#Reports"
-                       data-toggle="collapse"
-                       aria-expanded="false"
-                       class="dropdown-toggle">My Assets</a>
-                    <ul class="collapse list-unstyled" id="Reports">
-                        <li>
-                            <a href="/Assets/CreateAsset">New Asset</a>
-                        </li>
-                        <li>
-                            <a href="/Assets/ListAllMyAssets">All</a>
-                        </li>
-                    </ul>
-                </li>
-
-
-                <li @(ViewBag.title.Contains("Notification") ? "active" : "")>
-                    <a href="#notifications"
-                       data-toggle="collapse"
-                       aria-expanded="false"
-                       class="dropdown-toggle">
-                        Notifications
-                        <span class="badge badge-pill badge-danger">
-                            @ViewBag.num_notifications
-                        </span>
-                    </a>
-                    <ul class="collapse list-unstyled" id="notifications">
-                        <li>
-                            <a href="/Notifications/AllNotifications">
-                                All Notifications
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/Notifications/Read">Read</a>
-                        </li>
-
-                        <li>
-                            <a href="/Notifications/UnRead">UnRead</a>
+                            <a href="~/RabbitsNotes/AllRecords">Rabbitry Notes</a>
                         </li>
 
                     </ul>
                 </li>
 
 
-                @*
-        <li class="@(ViewBag.title=="Settings"?"active":"")">
-            <a href="/Home/Settings">Settings</a>
-        </li>
-
-
-
-                <li class="@(ViewBag.title=="About"?"active":"")">
-                    <a href="/Home/About">About</a>
-                </li>
-
-            </ul>
-                *@
 
             </ul>
 
@@ -243,20 +145,20 @@
                         <div class="nav navbar-nav ml-auto">
                             <h5>@ViewBag.title</h5>
                         </div>
-                        @*                        <ul class="nav navbar-nav ml-auto">
-                                <li class="nav-item active">
-                                    <a class="nav-link" href="#">Page</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Page</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Page</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Page</a>
-                                </li>
-                            </ul>*@
+                        @*<ul class="nav navbar-nav ml-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="#">Page</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Page</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Page</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Page</a>
+                            </li>
+                        </ul>*@
                     </div>
                 </div>
             </nav>
@@ -334,7 +236,7 @@
 
     <script>
         $('.zebra_date').Zebra_DatePicker({
-            format:'d-M-Y'
+            format: 'd-M-Y'
         });
     </script>
 

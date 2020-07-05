@@ -1,24 +1,23 @@
 ﻿@{
     Layout = "~/Views/Shared/_LayoutMain.cshtml";
     var rabbits = (List<FarmManager.Models.MRabbits>)ViewBag.rabbits;
-    var rabbit = (FarmManager.Models.MRabbitsSalesRecords)ViewBag.rabbit;
 }
 
 <div class="container">
     <div class="row">
 
         <div class="col-md-12">
-            <form action="~/RabbitsSales/EditRabbit" method="post" style="width:80%;margin:auto;">
-                <input type="hidden" name="Id" value="@rabbit.Id" />
+            <form action="~/RabbitsSales/CreateRabbitSaleRecord" method="post" style="width:80%;margin:auto;">
+
                 @*row*@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
                             <label><span style="color:red">*</span> NameID</label>
                             <select name="NameId" class="form-control chosen">
-                                @foreach (var _rabbit in rabbits)
+                                @foreach(var rabbit in rabbits)
                                 {
-                                    <option value="@_rabbit.NameId" selected="@(rabbit.NameId==_rabbit.NameId)">@_rabbit.NameId</option>
+                                    <option value="@rabbit.NameId">@rabbit.NameId</option>
                                 }
                             </select>
                         </div>
@@ -31,7 +30,7 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label><span style="color:red">*</span>DateSold</label>
-                            <input name="DateSold" type="text" class="form-control zebra_date" value="@rabbit.DateSold.ToString("d-MMM-yyyy")" required>
+                            <input name="DateSold" type="text" class="form-control zebra_date" required>
                         </div>
                     </div>
                 </div>
@@ -41,7 +40,7 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label><span style="color:red">*</span>WeightKg(KG)</label>
-                            <input name="WeightKg" type="number" step="any" min="0" class="form-control" value="@rabbit.WeightKg" required>
+                            <input name="WeightKg" type="number" step="any" min="0" class="form-control" required>
                         </div>
                     </div>
                 </div>
@@ -50,7 +49,8 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
-                            Pedigree &nbsp;<input name="Pedigree" type="checkbox" @(rabbit.Pedigree?"checked":"") value="true">
+                            Pedigree &nbsp;<input name="WeightKg" type="checkbox">
+                            
                         </div>
                     </div>
                 </div>
@@ -60,7 +60,7 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label><span style="color:red">*</span>Price</label>
-                            <input name="Price" type="number" step="any" min="0" value="@rabbit.Price" class="form-control">
+                            <input name="Price" type="number" step="any" min="0" class="form-control">
                         </div>
                     </div>
                 </div>
@@ -70,19 +70,19 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label><span style="color:red">*</span>BuyerName</label>
-                            <input name="BuyerName" type="text" value="@rabbit.BuyerName" class="form-control">
+                            <input name="BuyerName" type="text" class="form-control">
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label><span style="color:red">*</span>BuyerEmail</label>
-                            <input name="BuyerEmail" type="email" value="@rabbit.BuyerEmail" class="form-control">
+                            <input name="BuyerEmail" type="email" class="form-control">
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label><span style="color:red">*</span>BuyerMobile</label>
-                            <input name="BuyerMobile" type="tel" value="@rabbit.BuyerMobile" class="form-control">
+                            <input name="BuyerMobile" type="tel" class="form-control">
                         </div>
                     </div>
                 </div>
@@ -92,7 +92,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label><span style="color:red">*</span>BuyerAddress</label>
-                            <textarea name="BuyerAddress" class="form-control">@rabbit.BuyerAddress</textarea>
+                            <textarea name="BuyerAddress" class="form-control"></textarea>
                         </div>
                     </div>
                 </div>
@@ -103,7 +103,7 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label><span style="color:red"></span> Notes</label>
-                            <textarea name="Notes" class="form-control">@rabbit.Notes</textarea>
+                            <textarea name="Notes" class="form-control"></textarea>
                         </div>
                     </div>
                 </div>

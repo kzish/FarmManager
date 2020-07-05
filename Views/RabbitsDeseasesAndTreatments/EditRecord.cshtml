@@ -1,0 +1,71 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+    var record = (FarmManager.Models.MRabbitsDeseasesAndTreatmentNotes)ViewBag.record;
+}
+
+<div class="container">
+    <div class="row">
+
+        <div class="col-md-12">
+            <form action="~/RabbitsDeseasesAndTreatments/EditRecord" method="post" style="width:80%;margin:auto;">
+                <input type="hidden" value="@record.Id" name="Id" />
+                @*row*@
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label><span style="color:red">*</span> Desease</label>
+                            <input type="text" class="form-control" name="Desease" required value="@record.Desease" />
+                        </div>
+                    </div>
+                </div>
+
+
+                @*row*@
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label><span style="color:red">*</span> Symptoms</label>
+                            <input type="text" class="form-control" name="Symptoms" required  value="@record.Symptoms"/>
+                        </div>
+                    </div>
+                </div>
+
+
+                @*row*@
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label><span style="color:red">*</span> Treatment</label>
+                            <input type="text" class="form-control" name="Treatment" required value="@record.Treatment" />
+                        </div>
+                    </div>
+                </div>
+
+
+
+                @*row*@
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label><span style="color:red"></span> Notes</label>
+                            <textarea name="Notes" class="form-control">@record.Notes</textarea>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+                </div>
+
+
+            </form>
+        </div>
+
+    </div>
+</div>
